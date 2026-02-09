@@ -1,17 +1,24 @@
-import Navbar from './navbar'
+import Navbar from '../src/components/navbar'
 import { Outlet } from 'react-router-dom' 
 import { createBrowserRouter } from 'react-router-dom' 
-import Body from './Body'
-
+import Body from '../src/components/Body'
+import Login from '../src/components/login'
+import Footer from '../src/components/footer'
+import {Provider} from 'react-redux'
+import appstore from '../utils/appstore'
 const App = () => {
   return (
-    <div>
+   <Provider store={appstore}>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
+   </Provider>
   )
 }
-
 const AppRouter = createBrowserRouter([
   {
     path: '/',
@@ -23,7 +30,7 @@ const AppRouter = createBrowserRouter([
       },
       {
         path:"/login",
-        element:<h1>Login Page</h1>
+        element:<Login />
       }
     ],
   },
